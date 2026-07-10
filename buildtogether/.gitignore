@@ -4,8 +4,4 @@ build/
 .env
 .env.local
 *.log
-<<<<<<< HEAD
 .DS_Store
-=======
-.DS_Store
->>>>>>> 209069a (Add vercel.json for backend deployment)
