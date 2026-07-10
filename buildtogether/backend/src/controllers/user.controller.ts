@@ -91,9 +91,9 @@ export class UserController {
         return res.status(400).json({ success: false, error: 'No file uploaded' });
       }
       const profile = await userService.uploadAvatar(req.user!.id, req.file);
-      res.json({ success: true, data: profile, message: 'Avatar updated' });
+      return res.json({ success: true, data: profile, message: 'Avatar updated' });
     } catch (error: any) {
-      res.status(error.statusCode || 500).json({ success: false, error: error.message });
+      return res.status(error.statusCode || 500).json({ success: false, error: error.message });
     }
   }
 
@@ -103,9 +103,9 @@ export class UserController {
         return res.status(400).json({ success: false, error: 'No file uploaded' });
       }
       const profile = await userService.uploadBanner(req.user!.id, req.file);
-      res.json({ success: true, data: profile, message: 'Banner updated' });
+      return res.json({ success: true, data: profile, message: 'Banner updated' });
     } catch (error: any) {
-      res.status(error.statusCode || 500).json({ success: false, error: error.message });
+      return res.status(error.statusCode || 500).json({ success: false, error: error.message });
     }
   }
 
