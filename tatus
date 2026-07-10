@@ -1,0 +1,5 @@
+[33m4c636d5[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Fix TS7030 return type errors in user controller
+[33m73fb3e8[m Fix backend vercel.json to build from source directly
+[33m93953b4[m Add vercel.json for backend deployment
+[33me1704ba[m Resolve gitignore cleanup
+[33m0b8b461[m Create .gitignore
