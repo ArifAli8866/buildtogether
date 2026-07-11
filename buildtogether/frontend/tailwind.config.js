@@ -9,6 +9,7 @@ export default {
     extend: {
       colors: {
         primary: {
+          DEFAULT: 'var(--color-primary)',
           50: '#f0f4ff',
           100: '#dbe4ff',
           200: '#bac8ff',
@@ -21,6 +22,7 @@ export default {
           900: '#364fc7',
         },
         accent: {
+          DEFAULT: 'var(--color-accent)',
           50: '#fff0f6',
           100: '#ffdeeb',
           200: '#fcc2d7',
@@ -33,6 +35,7 @@ export default {
           900: '#a61e4d',
         },
         surface: {
+          DEFAULT: 'var(--color-surface)',
           50: '#f8f9fa',
           100: '#f1f3f5',
           200: '#e9ecef',
@@ -43,6 +46,22 @@ export default {
           700: '#495057',
           800: '#343a40',
           900: '#212529',
+        },
+        text: {
+          DEFAULT: 'var(--color-text)',
+          secondary: 'var(--color-text-secondary)',
+        },
+        border: {
+          DEFAULT: 'var(--color-border)',
+        },
+        success: {
+          DEFAULT: 'var(--color-success)',
+        },
+        warning: {
+          DEFAULT: 'var(--color-warning)',
+        },
+        error: {
+          DEFAULT: 'var(--color-error)',
         },
         glass: {
           white: 'rgba(255, 255, 255, 0.1)',

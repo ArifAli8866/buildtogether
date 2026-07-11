@@ -25,7 +25,7 @@
   }
 
   * {
-    @apply border-border;
+    border-color: var(--color-border);
   }
 
   body {
@@ -33,7 +33,8 @@
   }
 
   ::selection {
-    @apply bg-primary/20 text-primary;
+    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    color: var(--color-primary);
   }
 
   ::-webkit-scrollbar {
@@ -54,6 +55,7 @@
 }
 
 @layer components {
+
   /* Glassmorphism */
   .glass {
     @apply bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10;
@@ -90,16 +92,28 @@
   }
 
   .btn-ghost {
-    @apply text-surface-600 dark:text-surface-400 hover:text-primary dark:hover:text-primary hover:bg-primary/10 font-medium px-4 py-2 rounded-xl transition-all duration-200;
+    @apply text-surface-600 dark:text-surface-400 hover:text-primary dark:hover:text-primary font-medium px-4 py-2 rounded-xl transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
   }
 
   /* Input */
   .input {
-    @apply w-full px-4 py-3 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-xl focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 outline-none;
+    @apply w-full px-4 py-3 bg-white dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-xl focus:border-primary transition-all duration-200 outline-none;
+  }
+
+  .input:focus {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 50%, transparent);
   }
 
   .input-error {
-    @apply border-error focus:ring-error/50 focus:border-error;
+    @apply border-error focus:border-error;
+  }
+
+  .input-error:focus {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-error) 50%, transparent);
   }
 
   /* Card */
@@ -117,23 +131,28 @@
   }
 
   .badge-primary {
-    @apply badge bg-primary/10 text-primary;
+    @apply text-primary;
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
   }
 
   .badge-accent {
-    @apply badge bg-accent/10 text-accent;
+    @apply text-accent;
+    background-color: color-mix(in srgb, var(--color-accent) 10%, transparent);
   }
 
   .badge-success {
-    @apply badge bg-success/10 text-success;
+    @apply text-success;
+    background-color: color-mix(in srgb, var(--color-success) 10%, transparent);
   }
 
   .badge-warning {
-    @apply badge bg-warning/10 text-warning;
+    @apply text-warning;
+    background-color: color-mix(in srgb, var(--color-warning) 10%, transparent);
   }
 
   .badge-error {
-    @apply badge bg-error/10 text-error;
+    @apply text-error;
+    background-color: color-mix(in srgb, var(--color-error) 10%, transparent);
   }
 
   /* Skeleton */

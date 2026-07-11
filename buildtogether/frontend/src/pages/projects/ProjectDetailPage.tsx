@@ -1,12 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui';
-import { useProjects } from '@/hooks';
+import { useProject } from '@/hooks';
 
 export default function ProjectDetailPage() {
     const { id } = useParams<{ id: string }>();
-    const { getProjectById, isLoading } = useProjects();
-    const project = getProjectById?.(id || '');
+    const { data: project, isLoading } = useProject(id || '');
 
     if (isLoading) {
         return (
@@ -48,7 +47,7 @@ export default function ProjectDetailPage() {
                 {project.tech_stack && project.tech_stack.length > 0 && (
                     <div className="flex flex-wrap gap-2 mb-6">
                         {project.tech_stack.map((tech: string) => (
-                            <Badge key={tech} variant="secondary">{tech}</Badge>
+                            <Badge key={tech} variant="default">{tech}</Badge>
                         ))}
                     </div>
                 )}

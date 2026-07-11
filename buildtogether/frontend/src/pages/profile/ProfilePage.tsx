@@ -59,7 +59,7 @@ export default function ProfilePage() {
                     {user?.skills && user.skills.length > 0 && (
                         <div className="flex flex-wrap gap-2">
                             {user.skills.map((skill: string) => (
-                                <Badge key={skill} variant="secondary">{skill}</Badge>
+                                <Badge key={skill} variant="default">{skill}</Badge>
                             ))}
                         </div>
                     )}

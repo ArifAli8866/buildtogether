@@ -69,7 +69,7 @@ export const Navbar = () => {
                                 <Link to={`/u/${profile?.username || ''}`}>
                                     <Avatar
                                         src={profile?.avatar_url}
-                                        name={profile?.full_name}
+                                        alt={profile?.full_name || ''}
                                         size="sm"
                                     />
                                 </Link>

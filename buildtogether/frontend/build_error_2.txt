@@ -1,0 +1,28 @@
+
+> @buildtogether/frontend@1.0.0 build
+> tsc && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 87 modules transformed.
+x Build failed in 1.29s
+error during build:
+[vite:css] [postcss] /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/frontend/src/index.css:1:1: The `bg-primary/20` class does not exist. If `bg-primary/20` is a custom class, make sure it is defined within a `@layer` directive.
+file: /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/frontend/src/index.css:1:0
+    at Input.error (/home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/postcss/lib/input.js:135:16)
+    at AtRule.error (/home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/postcss/lib/node.js:149:32)
+    at processApply (/home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:380:29)
+    at /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/tailwindcss/lib/lib/expandApplyAtRules.js:551:9
+    at /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/tailwindcss/lib/processTailwindFeatures.js:55:50
+    at async plugins (/home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/tailwindcss/lib/plugin.js:38:17)
+    at async LazyResult.runAsync (/home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/postcss/lib/lazy-result.js:293:11)
+    at async compileCSS (file:///home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36898:21)
+    at async Object.transform (file:///home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:36171:11)
+    at async transform (file:///home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/node_modules/rollup/dist/es/shared/node-entry.js:21726:16)
+npm error Lifecycle script `build` failed with error:
+npm error code 1
+npm error path /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/frontend
+npm error workspace @buildtogether/frontend@1.0.0
+npm error location /home/arifali/Downloads/workspace-019f4b87-5c20-775d-ab27-24715761c58d/buildtogether/frontend
+npm error command failed
+npm error command sh -c tsc && vite build

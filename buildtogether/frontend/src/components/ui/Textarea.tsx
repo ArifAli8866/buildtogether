@@ -17,7 +17,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           </label>
         )}
         <textarea
-          ref={ref}
           className={cn(
             'w-full px-4 py-2.5 bg-white dark:bg-surface-800 border rounded-xl',
             'text-surface-900 dark:text-surface-100',
