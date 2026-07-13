@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0b0e14;
+  color: #e8eaed;
+}
+
+::selection {
+  background-color: #7c6ff0;
+  color: #0b0e14;
+}
+
+/* thin, quiet scrollbar to match the dev-tool aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #232936;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333b4a;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* visible keyboard focus, kept subtle */
+:focus-visible {
+  outline: 2px solid #7c6ff0;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
