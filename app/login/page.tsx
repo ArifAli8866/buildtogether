@@ -8,12 +8,16 @@ export default function LoginPage() {
   const supabase = createClient();
 
   const signIn = async (provider: "google" | "github") => {
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
+    if (error) {
+      console.error("OAuth error:", error.message);
+      alert(error.message); // temporary, so you can see it without opening devtools
+    }
   };
 
   return (
