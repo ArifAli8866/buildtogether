@@ -1,23 +1,68 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import ConstellationHero from "@/components/ConstellationHero";
-import { Github } from "lucide-react";
+import { Github, Mail } from "lucide-react";
+
+type Mode = "signin" | "signup";
 
 export default function LoginPage() {
   const supabase = createClient();
+  const router = useRouter();
 
-  const signIn = async (provider: "google" | "github") => {
+  const [mode, setMode] = useState<Mode>("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  const signInWithProvider = async (provider: "google" | "github") => {
+    setError(null);
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
         redirectTo: `${window.location.origin}/auth/callback`,
       },
     });
-    if (error) {
-      console.error("OAuth error:", error.message);
-      alert(error.message); // temporary, so you can see it without opening devtools
+    if (error) setError(error.message);
+  };
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setNotice(null);
+    setSubmitting(true);
+
+    if (mode === "signup") {
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      setSubmitting(false);
+      if (error) {
+        setError(error.message);
+        return;
+      }
+      // If email confirmation is ON in Supabase, there's no session yet.
+      setNotice("Check your email to confirm your account, then come back and sign in.");
+      return;
     }
+
+    // mode === "signin"
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    setSubmitting(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    router.push("/");
+    router.refresh();
   };
 
   return (
@@ -35,20 +80,79 @@ export default function LoginPage() {
 
         <div className="flex flex-col gap-3 mt-8">
           <button
-            onClick={() => signIn("github")}
+            onClick={() => signInWithProvider("github")}
             className="flex items-center justify-center gap-2 bg-mist-100 hover:bg-white text-ink-900 text-sm font-medium py-3 rounded-xl transition-colors"
           >
             <Github size={18} />
             Continue with GitHub
           </button>
           <button
-            onClick={() => signIn("google")}
+            onClick={() => signInWithProvider("google")}
             className="flex items-center justify-center gap-2 border border-ink-600 hover:border-mist-400 text-mist-100 text-sm font-medium py-3 rounded-xl transition-colors"
           >
             <GoogleIcon />
             Continue with Google
           </button>
         </div>
+
+        <div className="flex items-center gap-3 my-6">
+          <div className="h-px bg-ink-700 flex-1" />
+          <span className="text-mist-400 text-xs font-mono">or</span>
+          <div className="h-px bg-ink-700 flex-1" />
+        </div>
+
+        <div className="flex gap-1 border border-ink-700 rounded-lg p-1 mb-4">
+          <button
+            onClick={() => { setMode("signin"); setError(null); setNotice(null); }}
+            className={`flex-1 text-sm font-medium py-1.5 rounded-md transition-colors ${mode === "signin" ? "bg-signal-violet text-white" : "text-mist-400 hover:text-mist-100"
+              }`}
+          >
+            Sign in
+          </button>
+          <button
+            onClick={() => { setMode("signup"); setError(null); setNotice(null); }}
+            className={`flex-1 text-sm font-medium py-1.5 rounded-md transition-colors ${mode === "signup" ? "bg-signal-violet text-white" : "text-mist-400 hover:text-mist-100"
+              }`}
+          >
+            Sign up
+          </button>
+        </div>
+
+        <form onSubmit={handleEmailSubmit} className="flex flex-col gap-3">
+          <input
+            type="email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            className="w-full bg-ink-800 border border-ink-600 rounded-xl px-3.5 py-2.5 text-sm text-mist-100 placeholder:text-mist-400 focus:border-signal-violet outline-none"
+          />
+          <input
+            type="password"
+            required
+            minLength={6}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password (min 6 characters)"
+            className="w-full bg-ink-800 border border-ink-600 rounded-xl px-3.5 py-2.5 text-sm text-mist-100 placeholder:text-mist-400 focus:border-signal-violet outline-none"
+          />
+
+          {error && <p className="text-signal-coral text-sm">{error}</p>}
+          {notice && <p className="text-signal-green text-sm">{notice}</p>}
+
+          <button
+            type="submit"
+            disabled={submitting}
+            className="flex items-center justify-center gap-2 bg-signal-violet hover:bg-signal-violetSoft disabled:opacity-60 text-white text-sm font-medium py-3 rounded-xl transition-colors"
+          >
+            <Mail size={16} />
+            {submitting
+              ? "Please wait…"
+              : mode === "signup"
+                ? "Create account"
+                : "Sign in with email"}
+          </button>
+        </form>
 
         <p className="text-mist-400 text-xs mt-6 leading-relaxed">
           By continuing you agree this is a portfolio / learning project.
