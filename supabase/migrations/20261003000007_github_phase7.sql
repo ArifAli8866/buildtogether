@@ -100,11 +100,11 @@ CREATE INDEX IF NOT EXISTS idx_code_reviews_pr_number ON public.code_reviews(pro
 -- 5. UPDATED_AT TRIGGERS
 CREATE OR REPLACE TRIGGER handle_updated_at_user_github_accounts
   BEFORE UPDATE ON public.user_github_accounts
-  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 CREATE OR REPLACE TRIGGER handle_updated_at_project_github_repos
   BEFORE UPDATE ON public.project_github_repos
-  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+  FOR EACH ROW EXECUTE FUNCTION public.set_updated_at();
 
 -- 6. REALTIME PUBLICATION
 DO $$
