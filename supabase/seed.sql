@@ -2,7 +2,7 @@
 -- Build Together — Baseline Taxonomy Seed Data
 -- File: supabase/seed.sql
 -- ==============================================================================
-
+-- still it is not pushed i think so don't think that it is pushed.. ok
 -- 1. Standard Skills Taxonomy
 INSERT INTO public.skills (name, category) VALUES
   ('Frontend Development', 'Engineering'),
